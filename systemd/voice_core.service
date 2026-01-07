@@ -1,0 +1,25 @@
+[Unit]
+Description=Voice Assistant Core (Audio Processing)
+After=sound.target
+Wants=sound.target
+
+[Service]
+Type=simple
+User=root
+Group=audio
+ExecStart=/usr/local/bin/voice_core
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Resource limits
+CPUQuota=20%
+MemoryMax=256M
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

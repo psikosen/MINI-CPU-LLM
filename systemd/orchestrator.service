@@ -1,0 +1,30 @@
+[Unit]
+Description=Voice Assistant Orchestrator
+After=voice_core.service ollama.service
+Requires=voice_core.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/voice_assistant/orchestrator
+ExecStart=/usr/bin/python3 /opt/voice_assistant/orchestrator/src/main.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Environment
+Environment="PYTHONUNBUFFERED=1"
+
+# Resource limits
+CPUQuota=50%
+MemoryMax=512M
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=false
+
+[Install]
+WantedBy=multi-user.target

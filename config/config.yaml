@@ -1,0 +1,69 @@
+# Voice Assistant Configuration
+
+# Speech-to-Text (STT) Settings
+stt:
+  engine: "whisper.cpp"
+  model: "./models/ggml-tiny.en.bin"  # tiny.en, base.en, small.en
+  model_url: "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin"
+
+# Language Model (LLM) Settings
+llm:
+  engine: "ollama"
+  model: "gemma3:270m"
+  base_url: "http://localhost:11434"
+  context_limit: 1024
+  temperature: 0.7
+  max_tokens: 128
+
+  # System prompt
+  system_prompt: |
+    You are a helpful voice assistant running on a Raspberry Pi.
+    You provide concise, natural responses suitable for spoken dialogue.
+    Keep responses brief and conversational, typically 1-3 sentences.
+    Be friendly and helpful.
+
+# Text-to-Speech (TTS) Settings
+tts:
+  engine: "kokoro"  # kokoro, kitten, espeak (fallback)
+  sample_rate: 16000
+  output_dir: "/tmp"
+
+# Voice Activity Detection (VAD) Settings
+vad:
+  threshold: 0.65
+  min_speech_duration_ms: 300
+  min_silence_duration_ms: 500
+  energy_threshold: 0.02
+
+# Wake Word Settings
+wake_word:
+  enabled: true
+  keyword: "computer"
+  sensitivity: 0.5
+
+# Audio Settings
+audio:
+  sample_rate: 16000
+  channels: 1
+  capture_device: "default"
+  playback_device: "default"
+
+# Memory Settings
+memory:
+  database: "/var/lib/voice_assistant/memory.db"
+  max_history_turns: 10
+  max_age_days: 30
+
+# IPC Settings
+ipc:
+  socket_path: "/tmp/voice_assistant.sock"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "/var/log/voice_assistant/orchestrator.log"
+
+# Performance
+performance:
+  idle_cpu_limit_percent: 5
+  cleanup_interval_hours: 1
