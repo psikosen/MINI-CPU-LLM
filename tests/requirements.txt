@@ -1,0 +1,24 @@
+# Test requirements for MINI-CPU-LLM
+
+# Testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.1
+pytest-asyncio>=0.21.0
+pytest-timeout>=2.1.0
+
+# Mocking and testing utilities
+mock>=5.1.0
+
+# Coverage reporting
+coverage>=7.3.0
+
+# Code quality
+flake8>=6.1.0
+black>=23.7.0
+isort>=5.12.0
+mypy>=1.5.0
+
+# Type stubs
+types-PyYAML>=6.0.12
+types-requests>=2.31.0
