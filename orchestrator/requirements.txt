@@ -1,2 +1,16 @@
 requests>=2.31.0
 PyYAML>=6.0.1
+
+# Core ML/AI
+numpy>=1.24.0
+onnxruntime>=1.16.0  # For Silero VAD and Kokoro TTS
+
+# Wake Word Detection (choose one or both)
+pvporcupine>=3.0.0  # Porcupine (requires API key)
+openwakeword>=0.5.0  # OpenWakeWord (free alternative)
+
+# TTS Enhancement
+kokoro-onnx>=0.1.0  # For better Kokoro TTS integration (optional)
+
+# Optional audio processing
+scipy>=1.11.0  # For advanced audio processing (optional)

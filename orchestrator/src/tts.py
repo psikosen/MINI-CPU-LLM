@@ -21,19 +21,34 @@ class TTSEngine(ABC):
 
 
 class KokoroTTS(TTSEngine):
-    """Kokoro TTS engine (placeholder - requires actual implementation)"""
+    """Kokoro TTS engine with real implementation"""
 
-    def __init__(self, model_path: Optional[str] = None):
-        self.model_path = model_path
-        logger.info("Kokoro TTS initialized")
-        logger.warning("Kokoro TTS not yet fully implemented - using fallback")
+    def __init__(self, model_path: Optional[str] = None, voice: str = "af_sarah"):
+        self.model_path = model_path or "./models/kokoro/kokoro-v0_19.onnx"
+        self.voice = voice
+        self.kokoro_impl = None
+
+        # Try to import real Kokoro implementation
+        try:
+            from tts_kokoro import KokoroTTS as KokoroImpl
+            import os
+
+            if os.path.exists(self.model_path):
+                voices_path = os.path.join(os.path.dirname(self.model_path), "voices.bin")
+                self.kokoro_impl = KokoroImpl(self.model_path, voices_path)
+                logger.info("Kokoro TTS initialized with real model")
+            else:
+                logger.warning(f"Kokoro model not found at {self.model_path}, using fallback")
+        except ImportError:
+            logger.warning("Kokoro TTS implementation not available, using espeak fallback")
 
     def synthesize(self, text: str, output_path: str) -> bool:
         """Synthesize text using Kokoro"""
-        # TODO: Implement actual Kokoro TTS
-        # For now, fall back to espeak
-        logger.warning("Kokoro TTS not available, using espeak fallback")
-        return self._espeak_fallback(text, output_path)
+        if self.kokoro_impl:
+            return self.kokoro_impl.synthesize(text, output_path, self.voice)
+        else:
+            logger.warning("Kokoro TTS not available, using espeak fallback")
+            return self._espeak_fallback(text, output_path)
 
     def _espeak_fallback(self, text: str, output_path: str) -> bool:
         """Fallback to espeak for basic TTS"""
