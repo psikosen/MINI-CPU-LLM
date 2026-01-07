@@ -27,9 +27,13 @@ tts:
   engine: "kokoro"  # kokoro, kitten, espeak (fallback)
   sample_rate: 16000
   output_dir: "/tmp"
+  model_path: "./models/kokoro"
+  voice: "af_sarah"  # Default voice
 
 # Voice Activity Detection (VAD) Settings
 vad:
+  engine: "silero"  # silero (real), simple (placeholder)
+  model_path: "./models/silero_vad.onnx"
   threshold: 0.65
   min_speech_duration_ms: 300
   min_silence_duration_ms: 500
@@ -38,8 +42,13 @@ vad:
 # Wake Word Settings
 wake_word:
   enabled: true
-  keyword: "computer"
+  engine: "porcupine"  # porcupine (real), simple (placeholder)
+  keywords:
+    - "wake up jared"
+    - "activate"
   sensitivity: 0.5
+  model_path: "./models/porcupine"
+  access_key: ""  # Get free key from https://console.picovoice.ai/
 
 # Audio Settings
 audio:
