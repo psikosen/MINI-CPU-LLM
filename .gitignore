@@ -1,0 +1,66 @@
+# Build artifacts
+core/build/
+core/lib/
+*.o
+*.a
+*.so
+*.dylib
+
+# Python
+orchestrator/venv/
+orchestrator/__pycache__/
+orchestrator/**/__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.Python
+*.py[cod]
+*$py.class
+
+# Models
+*.bin
+*.gguf
+models/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+/tmp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Audio files
+*.wav
+*.raw
+*.mp3
+*.flac
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+.DS_Store
+
+# System
+.env
+.env.local
+*.sock
+
+# Test outputs
+test_output/
+coverage/
+.coverage
+htmlcov/
+
+# Documentation builds
+docs/_build/
+site/
